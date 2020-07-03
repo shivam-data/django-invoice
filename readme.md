@@ -47,7 +47,7 @@ python manage.py runserver
 
 This is workflow of our system.
 
-![alt text] (https://github.com/shivam-data/django-invoice/blob/master/images/work-flow.PNG?raw=true)
+![Image of work-flow] (https://github.com/shivam-data/django-invoice/blob/master/images/work-flow.PNG?raw=true)
 
 ### Break down into end to end tests
 
