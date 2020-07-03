@@ -45,7 +45,9 @@ python manage.py runserver
 
 ## Understanding the work-flow
 
-The agent shall login to system
+This is workflow of our system.
+
+![alt text] (https://github.com/shivam-data/django-invoice/blob/master/images/work-flow.PNG?raw=true)
 
 ### Break down into end to end tests
 
