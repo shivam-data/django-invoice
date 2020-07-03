@@ -98,7 +98,7 @@ Manager can see all the data of all agents.
 
 Cron-job code/proof.
 
-![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/cron-job.PNG)
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/cron.PNG)
 
 
 Cron-job mail.
