@@ -51,7 +51,44 @@ python manage.py runserver
 
 This is workflow of our system.
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/work-flow.PNG)
+
+The registration page.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/register.PNG)
+
+The Login page.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/login.PNG)
+
+Add the invoice pdf for side-by-side.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/upload.PNG)
+
+Add the invoice details. Login is required for adding.
+
+If user is not logged in, he/she will be redirected for login.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/invoice-1.PNG)
+
+Table of invoice which will show all invoices. The invoice button shows detail of invoice.
+
+If user wants to add more item list to same invoice,keep the invoice number same and add new items.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/invoice-table.PNG)
+
+
+Manager gets access link whenever agent submits.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/access-link.PNG)
+
+Manager can see all the data of all agents.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/manager-invoice.PNG)
+
+Cron-job mail.
+
+![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/cron-job-summary.PNG)
 
 
 ## Answers to the assigment questions:
