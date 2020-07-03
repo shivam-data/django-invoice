@@ -31,10 +31,7 @@ def addinvoice(req):
         invoice_date = req.POST.get('InvoiceDate')
         global link
         global token
-        #uf = req.FILES['pdf']
-        #fs = FileSystemStorage()
-        #name = fs.save(uf.name,uf)
-
+       
         item_description = req.POST.get('item_d')
         item_quantity = req.POST.get('item_q')
         item_rate = req.POST.get('item_r')
@@ -49,28 +46,17 @@ def addinvoice(req):
         token = get_random_string(length=16)
         sendmail(req,token,manager_mail)
 
-        # print('Send mail!!')
-        # subject = 'Hello Gandu'
-        # body = '<h1>Dekh gandu automated message</h1>'
-        # myemail = 'www.princeshivam97@gmail.com'
-        # reciepent = 'meet2579@yahoo.com'
-        # send_mail(subject,body,myemail,[reciepent],fail_silently=False)
-
+      
         items = ListOfItems(invoice_number=user,item_description=item_description,item_quantity=item_quantity,item_rate=item_rate,user_id=userid)
         print(items)
         items.save()
 
-
-        #context['url'] = fs.url(name)
         records = Invoices.objects.filter(user_id=userid)
         return render(req,'addinvoice.html',{'records':records,'link':link})
-        #return redirect('/invoice/addinvoice')
     else:
         records = Invoices.objects.filter(user_id=userid)
         return render(req,'addinvoice.html',{'records':records,'link':link})
 
-# def addinvoice(req,path):
-#     return render(req,'addinvoice.html',path)
 @login_required(login_url='/login')
 def upload(req):
     userid = req.user.id
@@ -107,7 +93,7 @@ def delete(req,id):
 
 
 def viewmanager(req,id):
-    #print(req.query.token)
+
     global token
     if str(id) == str(token): 
         records = Invoices.objects.all()

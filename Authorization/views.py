@@ -8,8 +8,6 @@ from django.contrib.sites.shortcuts import get_current_site
 # Create your views here.
 
 def register(req):
-    # username is remaining
-    # password matching
     if req.method == 'POST':
         username = req.POST['username']
         email = req.POST['email']
@@ -54,13 +52,11 @@ def login(req):
 
 @login_required(login_url='/')
 def logic(req):
-    # the agent reference id -- req.user.id
     print(req.user.id)
     return HttpResponse('<h1>Logic part')
 
 @login_required(login_url='/')
 def logout(req):
-    # on click of logout button
     auth.logout(req)
     if not req.user.is_authenticated:
         print('Not logged in')
