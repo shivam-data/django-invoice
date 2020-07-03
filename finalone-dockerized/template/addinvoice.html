@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <title>Add Purchase Invoice</title>
+</head>
+<body>
+
+
+<a href="/logout" class="btn btn-warning btn-sm"  style="float: right" onclick="return confirm('Logout ?')">Logout</a>
+{% if link %}
+    <embed src = "{{link}}" width="600" height="600">
+{% endif %}
+
+    <h2 align="center">Add Your Service Invoice Information</h2>
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+                 <form action = "/invoice/addinvoice" method="POST">
+                    {%csrf_token%}
+                    <table align="center">
+                        <tr><td>Invoice Number</td><td><input type="number" name="InvoiceNumber" required></td></tr>
+                        <tr><td>Vendor Name</td><td><input type="text" name="VendorName" required></td></tr>
+                        <tr><td>Invoice Date</td><td><input type="date" name="InvoiceDate" required></td></tr>
+                        
+                        <div class='field_wrapper'>
+                            <div>
+                            <tr><td> Item Description </td><td><input type='textarea' name="item_d" required></td></tr>
+                            <tr><td> Item quantity </td><td><input type='number' name='item_q' required></td></tr>
+                            <tr><td> Item rate </td><td><input type='number' name='item_r' required></td>
+                            <td><input type="button" value="Add item" class="addfield" name='addfield'></td></tr>
+                            </div>
+                        </div>
+
+
+                        <tr><td><input type="submit" value="Submit"></td>
+                        </form>
+                        <form action='/invoice/pdfupload' method='GET'>
+                        {% csrf_token %}
+                        <td><input type="submit" value="Add new pdf" href='/'></td></tr>
+                        </form>
+                    </table>
+                
+
+            </div>
+        </div>
+    </div>
+            <div class="row">
+                    <div class="col md-12">
+                        <div class="jumbotron p-3">
+
+                            <h2 align="center"> Your <b>Invoices</b> </h2>
+
+
+                            <table class="table table-hover table-dark">
+
+                                <tr>
+
+                    
+                                    <th>Invoice Number</th>
+                                    <th>Vendor Name</th>
+                                    <th>Invoice Date</th>
+                                    <th>Invoice</th>
+
+
+                                </tr>
+                {% for record in records  %}
+                                <tr>
+                                    <td>{{record.invoice_number}}</td>
+                                    <td>{{record.vendor_name}}</td>
+                                    <td>{{record.invoice_date}}</td>
+
+                                    
+                                    
+                                    <td>
+                                        <a href="/invoice/disp/{{record.invoice_number}}" class="btn btn-warning btn-sm">Invoice</a>
+                                        <a href="/invoice/delete/{{record.invoice_number}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete ?')">Delete</a>
+                                    </td>
+
+                                </tr>
+{% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    //var maxField = 10; //Input fields increment limitation
+    var addButton = $('.addfield'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var x = 1; //Initial field counter is 1
+    var fieldHTML = `<tr><td> Item Description </td><td><input type='textarea' name='item_d''></td></tr><tr><td> Item quantity </td><td><input type='number' name='item_q'></td></tr><tr><td> Item rate </td><td><input type='number' name='item_r'></td><td></tr>`; //New input field html 
+    //$(#Counter).text(x);
+
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        $(wrapper).append(fieldHTML); //Add field html
+        x++; //Increment field counter
+        //$(.Counter).hide();
+
+        
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+});
+</script>

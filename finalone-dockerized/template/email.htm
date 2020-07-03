@@ -1,0 +1,4 @@
+<form action="{% url "tokenauth:login" %}?next={{ request.GET.next }}" method="post">{% csrf_token %}
+    <input name="email" type="email" autofocus />
+    <button type="submit">Submit</button>
+</form>
