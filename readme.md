@@ -103,6 +103,13 @@ Cron-job code/proof.
 
 Cron-job mail.
 
+```
+#perform this command once to add the job
+
+python manage.py crontab add
+
+```
+
 ![Image of Yaktocat](https://github.com/shivam-data/django-invoice/blob/master/images/cron-job-summary.PNG)
 
 

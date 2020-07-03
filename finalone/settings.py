@@ -145,5 +145,5 @@ DEFAULT_FROM_EMAIL = 'www.princeshivam97@gmail.com'
 DEFAULT_TO_EMAIL = 'shivam.160410107094@gmail.com'
 
 CRONJOBS = [
-    ('0 10 * * *','utisl.helper.sendmaildaily')
+    ('0 10 * * *','utils.helper.sendmaildaily')
 ]
