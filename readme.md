@@ -25,10 +25,20 @@ What things you need to install
 ```
 
 ```
+Run the command
+
+docker-compose run web python manage.py migrate
+
+```
+
+```
 # And finally run
 
 docker-compose up
 ```
+
+### Note:
+If there's any error,please inform back.
 
 ### Prerequisites for normal
 
