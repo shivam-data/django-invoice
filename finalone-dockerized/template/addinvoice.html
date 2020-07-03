@@ -9,14 +9,40 @@
     <title>Add Purchase Invoice</title>
 </head>
 <body>
-
-
 <a href="/logout" class="btn btn-warning btn-sm"  style="float: right" onclick="return confirm('Logout ?')">Logout</a>
+<table>
+<tr><td>
+
+<style>
+.alert {
+  padding: 20px;
+  background-color: #33d6ff; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+</style>
 {% if link %}
     <embed src = "{{link}}" width="600" height="600">
 {% endif %}
-
-    <h2 align="center">Add Your Service Invoice Information</h2>
+</td>
+ <td style="padding:70px">   <h2 align="center">Add Your Service Invoice Information</h2>
     <div class="row">
         <div class="col md-12">
             <div class="jumbotron p-3">
@@ -26,15 +52,28 @@
                         <tr><td>Invoice Number</td><td><input type="number" name="InvoiceNumber" required></td></tr>
                         <tr><td>Vendor Name</td><td><input type="text" name="VendorName" required></td></tr>
                         <tr><td>Invoice Date</td><td><input type="date" name="InvoiceDate" required></td></tr>
-                        
+
                         <div class='field_wrapper'>
                             <div>
-                            <tr><td> Item Description </td><td><input type='textarea' name="item_d" required></td></tr>
-                            <tr><td> Item quantity </td><td><input type='number' name='item_q' required></td></tr>
-                            <tr><td> Item rate </td><td><input type='number' name='item_r' required></td>
-                            <td><input type="button" value="Add item" class="addfield" name='addfield'></td></tr>
+                            <tr style='padding:15px'><td> Item Description </td><td><input type='textarea' name="item_d" required></td></tr>
+                            <t style='padding:15px'><td> Item quantity </td><td><input type='number' name='item_q' required></td></tr>
+                            <tr style='padding:15px'><td> Item rate </td><td><input type='number' name='item_r' required></td>
+                            <td ><input type="button" value="Add item" class="addfield" name='addfield'></td></tr>
                             </div>
                         </div>
+
+                        
+                       <tr><td> <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        Note: The manager id is stored by default in environment variables.
+                              Asking here just for testing purpose.
+
+
+                        <tr style='padding:15px'><td> Manager Email </td><td><input type='textarea' name="manager_id" required></td></tr>
+                        </div></td></tr>
+
+
+                        
 
 
                         <tr><td><input type="submit" value="Submit"></td>
@@ -45,7 +84,8 @@
                         </form>
                     </table>
                 
-
+</td>
+ </table>
             </div>
         </div>
     </div>
@@ -70,7 +110,7 @@
                                 </tr>
                 {% for record in records  %}
                                 <tr>
-                                    <td>{{record.invoice_number}}</td>
+                                    <td >{{record.invoice_number}}</td>
                                     <td>{{record.vendor_name}}</td>
                                     <td>{{record.invoice_date}}</td>
 
@@ -87,6 +127,8 @@
                         </div>
                     </div>
                 </div>
+
+               
 
 </body>
 </html>

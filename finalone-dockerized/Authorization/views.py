@@ -18,30 +18,38 @@ def register(req):
 
         if password1:
             if password1 == password2:
+                if User.objects.filter(username=username).exists():
+                    print('user')
+                    messages.info(req,'User Already exists')
+                    return render(req,'register.html')
+                elif User.objects.filter(email=email).exists():
+                    messages.info(req,'Email Already taken')
+                    return render(req,'register.html')
                 user = User.objects.create_user(username=username,password=password1,email=email)
                 user.save()
-                messages.success(req,'User Created')
                 auth.login(req,user)
                 return redirect('/invoice/pdfupload')
             else:
-                return 
+                messages.info(req,'Password not matching') 
+                return render(req,'register.html')
         else:
             return redirect('/register')
     return render(req,'register.html')
 
 def login(req):
-    print(get_current_site(req))
-    print('in login part')
     if req.method == 'POST':
         print('In the login')
-        username = req.POST['username']
-        password = req.POST['password']
+        username = str(req.POST['username'])
+        password = str(req.POST['password'])
 
+        print(username,password)
         user = auth.authenticate(username = username,password= password)
 
         if user is not None:
             auth.login(req,user)
             return redirect('/invoice/pdfupload')
+        else:
+            messages.info(req,'Login Failed')
     return render(req,'login.html')
 
 @login_required(login_url='/')

@@ -12,15 +12,15 @@ from django.contrib import messages
 link = ''
 token = ''
 
-def sendmail(request,token):
-    subject = 'Link For access Token'
-    body ='An agent Just added new invoice check by clicking here:'+ str(get_current_site(request))+'/invoice/viewmanager/'+str(token)
+def sendmail(request,token,mail):
+    subject = 'An agent Just added new invoice.Link For access Token'
+    body =str(get_current_site(request))+'/invoice/viewmanager/'+str(token)
     myemail = 'www.princeshivam97@gmail.com'
-    reciepent = 'dummy@gmail.com'
+    reciepent = str(mail)
     send_mail(subject,body,myemail,[reciepent],fail_silently=False)
 
 
-@login_required(login_url='/')
+@login_required(login_url='/login')
 def addinvoice(req):
     print(req)
     userid = req.user.id
@@ -39,13 +39,15 @@ def addinvoice(req):
         item_quantity = req.POST.get('item_q')
         item_rate = req.POST.get('item_r')
 
+        manager_mail = req.POST.get('manager_id')
+
         print(item_description)
 
         user = Invoices(invoice_number=invoice_number,user_id=userid,vendor_name=vendor_name,invoice_date=invoice_date,pdf_copy='123')
         user.save()
 
         token = get_random_string(length=16)
-        sendmail(req,token)
+        sendmail(req,token,manager_mail)
 
         # print('Send mail!!')
         # subject = 'Hello Gandu'
@@ -69,7 +71,7 @@ def addinvoice(req):
 
 # def addinvoice(req,path):
 #     return render(req,'addinvoice.html',path)
-@login_required(login_url='/')
+@login_required(login_url='/login')
 def upload(req):
     userid = req.user.id
     if req.method == 'POST':
@@ -90,27 +92,19 @@ def upload(req):
     else:
         return render(req,'hello.htm')
 
-@login_required(login_url='/')    
+@login_required(login_url='/login')    
 def disp(req,id):
     userid = req.user.id
     arr =  ListOfItems.objects.filter(invoice_number = id,user_id=userid)
     return render(req,'invoice.html',{'records':arr})
 
-@login_required(login_url='/')
+@login_required(login_url='/login')
 def delete(req,id):
     userid = req.user.id
     Invoices.objects.filter(invoice_number = id).delete()
     records = Invoices.objects.filter(user_id=userid)
     return render(req,'addinvoice.html',{'link':link,'records':records})
 
-
-# email auth 
-from tokenauth.helpers import email_login_link
-def manager(req):
-    print(req)
-    #user = get_user(req)
-    email_login_link(req,'www.princeshivam97@gmail.com',next_url='/invoice/viewmanager/')
-    return HttpResponse('Sent the link!!')
 
 def viewmanager(req,id):
     #print(req.query.token)
