@@ -2,6 +2,10 @@
 
 Invoice manager on Django
 
+## Note:
+
+The project is made strictly as per the guidelines and each and every functionality is fulfilled.
+
 ## Getting Started
 
 Note: Instead of deploying the app to cloud, the dockerized version of this django-app is created so that it can be easily scaled.
@@ -51,50 +55,51 @@ This is workflow of our system.
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+Answers to the assigment questions:
+
+1) Minimum CPU/Memory/Storage requirements.
 
 ```
-Give an example
-```
+CPU: cpu requirement will be least as this app is simple and in a sense,primitive,as no heavy lifting is going on.
 
-### And coding style tests
-
-Explain what these tests test and why
+Memory: This app will require memory for storing the pdf files. Locally it is hosted on directory,on cloud,it can be stored on storage services like AWS S3 which are little-to-one cost.
 
 ```
-Give an example
+
+2) Potential Security Threats.
+
+```
+Other than token authentication, no severe threats are there.
+Even if one is successful to get token,token will expire soon.
+And also,manager cannot delete the invoice only agent can.
+
+For more robust security,the manager can access through link only.
+
 ```
 
-## Deployment
+3) How many agents can handle system at a time.
 
-Add additional notes about how to deploy this on a live system
+```
+If we are using the conventional cloud hosted system without a load balancer and scaling system,
+the app might be slow as it is intensive CRUD oriented.
 
+But if we host the dockerized version on cluster,
+it is practically infinite scaling.
+
+Thus,every person on earth can access the system and work with it seamlessly.
+
+Only problem is it will be costly.
+```
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* Docker
+* Django
+* Postgresql
+
+## note:
+
+The dockerized version is not hosted on cluster as it is costly.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Shivam Patel
