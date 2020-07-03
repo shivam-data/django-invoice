@@ -51,11 +51,10 @@ python manage.py runserver
 
 This is workflow of our system.
 
-![Image of work-flow] (https://github.com/shivam-data/django-invoice/blob/master/images/work-flow.PNG?raw=true)
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 
-### Break down into end to end tests
 
-Answers to the assigment questions:
+## Answers to the assigment questions:
 
 1) Minimum CPU/Memory/Storage requirements.
 
